@@ -25,8 +25,13 @@ $posts = json_decode(file_get_contents($url))->{'user_actions'};
 $input = '';
 foreach ($posts as $post) {
     $input = $input . "\n\n" . html_entity_decode($post->{'excerpt'}, ENT_QUOTES, 'UTF-8');
-    #$input = $input . $post->{'excerpt'};
 }
+$input = str_replace("</p>", "\n", $input);
+$input = str_replace("<p>", "\n", $input);
+$input = strip_tags($input);
+$input = preg_replace("/@[a-z0-9A-Z_]* said:/i", "", $input);
+$input = preg_replace("/@[a-z0-9A-Z_]*/i", "", $input);
+$input = preg_replace("/^\n/", "", $input);
 
 $order = (int) $_GET["order"];
 if ($order < 1 || $order > 99)
