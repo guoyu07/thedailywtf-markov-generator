@@ -14,6 +14,8 @@
 
 <p>Source code is on <a href="https://github.com/machado2/thedailywtf-markov-generator">github</a></p>
 
+<p><a href="nodebb/">Version using @Ben_Lubar's local NodeBB instance</a></p>
+
 <form action="generate.php" method="get">
 <div class="form-horizontal">
     <div class="form-group">
