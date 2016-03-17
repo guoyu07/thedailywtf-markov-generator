@@ -18,12 +18,13 @@
 
 <p><a href="4chan/">Version using 4chan</a></p>
 
+<h2>Generate by Username</h2>
 <form action="generate.php" method="get">
 <div class="form-horizontal">
     <div class="form-group">
         <label for="order" class="control-label col-xs-2">Order</label>
         <div class="col-xs-10">
-            <input type="number" id="order" name="order" value="4" min="1" max="99" />
+            <input type="number" id="order" name="order" value="4" min="1" max="99" required />
         </div>
     </div>
     <div class="form-group">
@@ -40,6 +41,29 @@
 </div>
 </form>
 
+<h2>Or by TopicID</h2>
+
+<form action="gentopic.php" method="get">
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="order" class="control-label col-xs-2">Order</label>
+        <div class="col-xs-10">
+            <input type="number" id="order" name="order" value="4" min="1" max="99" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="topic" class="control-label col-xs-2">Topic ID</label>
+        <div class="col-xs-10">
+            <input type="number" id="topic" min="1" max="999999" name="topic" required autofocus />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button id="btnbuscar" class="btn btn-default">generate</button>
+        </div>
+    </div>
+</div>
+</form>
 </div>
 
 </html>

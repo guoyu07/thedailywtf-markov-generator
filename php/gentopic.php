@@ -16,17 +16,17 @@
 
 require 'markov.php';
 
-$username = urlencode( $_GET["username"]);
-if (!eregi("^[a-zA-Z0-9_]{2,99}$",$username))
-{
-    die('invalid username');
-}
+$topicid = (int) $_GET["topic"];
+if ($topicid < 1 || $topicid > 1000000)
+    die('invalid topic number');
 
-$url = "https://what.thedailywtf.com/user_actions.json?offset=0&username=" . $username . "&filter=4,5";
-$posts = json_decode(file_get_contents($url))->{'user_actions'};
+$url = "https://what.thedailywtf.com/t/" . $topicid . ".json?include_raw=1";
+$posts = json_decode(file_get_contents($url))->post_stream->posts;
 $input = '';
 foreach ($posts as $post) {
-    $input = $input . "\n\n" . html_entity_decode($post->{'excerpt'}, ENT_QUOTES, 'UTF-8');
+    if (isset($post->raw)) {
+        $input = $input . "\n\n" . html_entity_decode($post->raw, ENT_QUOTES, 'UTF-8');
+    }
 }
 $input = str_replace("</p>", "\n", $input);
 $input = str_replace("<p>", "\n", $input);
