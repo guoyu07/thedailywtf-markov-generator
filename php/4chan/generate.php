@@ -25,10 +25,12 @@ if (!eregi("^[a-z]{1,3}$",$board))
 $input = '';
 for ($page = 1; $page <= 10; $page++) {
     $url = "http://a.4cdn.org/" . $board . "/" . $page . ".json";
-    $threads = json_decode(file_get_contents($url))->{'threads'};
+    $threads = json_decode(file_get_contents($url))->threads;
     foreach ($threads as $thread) {
         foreach ($thread->{'posts'} as $post) {
-            $input = $input . "\n\n" . html_entity_decode($post->{'com'}, ENT_QUOTES, 'UTF-8');
+            if (isset($post->com)) {
+                $input = $input . "\n\n" . html_entity_decode($post->com, ENT_QUOTES, 'UTF-8');
+            }
         }
     }
 }
