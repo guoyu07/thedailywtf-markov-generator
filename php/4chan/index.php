@@ -14,22 +14,18 @@
 
 <p>Source code is on <a href="https://github.com/machado2/thedailywtf-markov-generator">github</a></p>
 
-<p><a href="nodebb/">Version using @Ben_Lubar's local NodeBB instance</a></p>
-
-<p><a href="4chan/">Version using 4chan</a></p>
-
 <form action="generate.php" method="get">
 <div class="form-horizontal">
     <div class="form-group">
-        <label for="order" class="control-label col-xs-2">Order</label>
+        <label for="board" class="control-label col-xs-2">Board</label>
         <div class="col-xs-10">
-            <input type="text" id="order" name="order" value="4" />
+            <input type="text" id="board" name="board" maxlength="3" value="b" required pattern="[a-z]{1,3}"/>
         </div>
     </div>
     <div class="form-group">
-        <label for="username" class="control-label col-xs-2">Username</label>
+        <label for="order" class="control-label col-xs-2">Order</label>
         <div class="col-xs-10">
-            <input type="text" id="username" name="username" autofocus />
+            <input type="number" id="order" name="order" value="4" min="1" max="99" autofocus />
         </div>
     </div>
     <div class="form-group">
