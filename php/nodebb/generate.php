@@ -17,8 +17,10 @@
 require '../markov.php';
 
 $username = urlencode( $_GET["username"]);
-if (strlen($username) < 3)
+if (!eregi("^[a-zA-Z0-9_]{2,99}$",$username))
+{
     die('invalid username');
+}
 
 $input = '';
 for ($page = 1; $page <= 10; $page++) {

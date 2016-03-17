@@ -19,13 +19,13 @@
     <div class="form-group">
         <label for="order" class="control-label col-xs-2">Order</label>
         <div class="col-xs-10">
-            <input type="text" id="order" name="order" value="4" />
+            <input type="number" id="order" name="order" value="4" min="1" max="99" />
         </div>
     </div>
     <div class="form-group">
         <label for="username" class="control-label col-xs-2">Username</label>
         <div class="col-xs-10">
-            <input type="text" id="username" name="username" autofocus />
+            <input type="text" id="username" name="username" required pattern="[a-zA-Z0-9_]{2,99}" autofocus />
         </div>
     </div>
     <div class="form-group">

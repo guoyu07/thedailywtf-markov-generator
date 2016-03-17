@@ -17,8 +17,10 @@
 require 'markov.php';
 
 $username = urlencode( $_GET["username"]);
-if (strlen($username) < 3)
+if (!eregi("^[a-zA-Z0-9_]{2,99}$",$username))
+{
     die('invalid username');
+}
 
 $url = "https://what.thedailywtf.com/user_actions.json?offset=0&username=" . $username . "&filter=4,5";
 $posts = json_decode(file_get_contents($url))->{'user_actions'};
