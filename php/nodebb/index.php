@@ -19,7 +19,7 @@
     <div class="form-group">
         <label for="order" class="control-label col-xs-2">Order</label>
         <div class="col-xs-10">
-            <input type="number" id="order" name="order" value="6" min="1" max="99" />
+            <input type="number" id="order" name="order" value="4" min="1" max="99" />
         </div>
     </div>
     <div class="form-group">
