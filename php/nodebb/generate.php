@@ -16,20 +16,32 @@
 
 require '../markov.php';
 
-$username = urlencode( $_GET["username"]);
+$username = strtolower(urlencode($_GET["username"]));
 if (!eregi("^[a-zA-Z0-9_]{2,99}$",$username))
 {
     die('invalid username');
 }
 
-$input = '';
-for ($page = 1; $page <= 10; $page++) {
-    $url = "https://discourse.local.lubar.me/api/user/" . $username . "/posts?page=" . $page;
-    $posts = json_decode(file_get_contents($url))->{'posts'};
-    foreach ($posts as $post) {
-        $input = $input . "\n\n" . html_entity_decode($post->{'content'}, ENT_QUOTES, 'UTF-8');
-    }
+$dir = getenv('OPENSHIFT_DATA_DIR');
+if ($dir == '') {
+    $dir = './';
 }
+$dir = $dir . $username . '.txt';
+
+if (!file_exists($dir)) {
+    $input = '';
+    for ($page = 1; $page <= 100; $page++) {
+        $url = "https://discourse.local.lubar.me/api/user/" . $username . "/posts?page=" . $page;
+        $posts = json_decode(file_get_contents($url))->{'posts'};
+        foreach ($posts as $post) {
+            $input = $input . "\n\n" . html_entity_decode($post->{'content'}, ENT_QUOTES, 'UTF-8');
+        }
+    }
+    file_put_contents($dir, $input);
+} else {
+    $input = file_get_contents($dir);
+}
+
 $input = str_replace("</p>", "\n", $input);
 $input = str_replace("<p>", "\n", $input);
 $input = strip_tags($input);
