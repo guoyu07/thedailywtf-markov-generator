@@ -30,7 +30,7 @@ $dir = $dir . $username . '.txt';
 
 if (!file_exists($dir)) {
     $input = '';
-    for ($page = 1; $page <= 100; $page++) {
+    for ($page = 1; $page <= 80; $page++) {
         $url = "https://discourse.local.lubar.me/api/user/" . $username . "/posts?page=" . $page;
         $posts = json_decode(file_get_contents($url))->{'posts'};
         foreach ($posts as $post) {
